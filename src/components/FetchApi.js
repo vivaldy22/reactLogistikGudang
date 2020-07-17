@@ -45,6 +45,8 @@ class FetchApi extends Component {
               {item.name} {item.type}
             </li>
           ))}
+          <input type="checkbox" value="test" onClick={() => alert()} />
+          <label>Test</label>
         </ul>
       );
     }
