@@ -11,23 +11,23 @@ class FetchApi extends Component {
   }
 
   getData = async () => {
-    try {
-      const res = await fetch("/goods");
-      const result = await res.json();
-      this.setState({
-        isLoaded: true,
-        items: result.result,
-      });
-    } catch (err) {
-      this.setState({
-        isLoaded: true,
-        err,
-      });
-    }
+    const res = await fetch("/goods");
+    const result = await res.json();
+    this.setState({
+      isLoaded: true,
+      items: result.result,
+    });
   };
 
   componentDidMount() {
-    this.getData().then();
+    this.getData()
+      .then()
+      .catch((err) => {
+        this.setState({
+          isLoaded: true,
+          err,
+        });
+      });
   }
 
   render() {
