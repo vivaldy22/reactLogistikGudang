@@ -19,7 +19,7 @@ class FetchApi extends Component {
     });
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.getData()
       .then()
       .catch((err) => {
@@ -28,7 +28,7 @@ class FetchApi extends Component {
           err,
         });
       });
-  }
+  };
 
   render() {
     const { err, isLoaded, items } = this.state;
