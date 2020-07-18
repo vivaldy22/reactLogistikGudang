@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import FetchApi from "../components/FetchApi";
+import GoodsList from "../../pages/goods/GoodsList";
+import CreateGoods from "../../pages/goods/CreateGoods";
 
 class MainScreen extends Component {
   render() {
     return (
       <div>
-        <FetchApi />
+        <GoodsList />
+        <CreateGoods />
       </div>
     );
   }
