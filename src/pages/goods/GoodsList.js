@@ -11,7 +11,7 @@ class GoodsList extends Component {
     };
   }
 
-  componentDidMount = () => {
+  getGoodsData = () => {
     getGoods()
       .then((goods) => {
         this.setState({
@@ -24,6 +24,10 @@ class GoodsList extends Component {
       });
   };
 
+  componentDidMount = () => {
+    this.getGoodsData();
+  };
+
   handleEditClick = (id) => {
     alert("EDIT" + id);
   };
@@ -34,6 +38,7 @@ class GoodsList extends Component {
 
   render() {
     const { err, isLoaded, goods } = this.state;
+    // this.getGoodsData();
     const showGoods = (
       <table>
         <tbody>

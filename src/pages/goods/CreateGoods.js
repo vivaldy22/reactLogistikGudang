@@ -20,6 +20,7 @@ class CreateGoods extends Component {
         this.setState({
           isLoaded: true,
           types,
+          goodsType: types[0].id,
         });
       })
       .catch((error) => {
@@ -34,20 +35,41 @@ class CreateGoods extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   handleSubmitBtnClick = (e) => {
     e.preventDefault();
+    console.log(this.state.goodsName);
+    console.log(this.state.goodsType);
+    if (!this.state.goodsName) {
+      alert("Nama produk tidak boleh kosong");
+    } else {
+      const good = {
+        name: this.state.goodsName,
+        type: this.state.goodsType,
+      };
 
-    const good = {
-      name: this.state.goodsName,
-      type: this.state.goodsType,
-    };
+      createGoods(good)
+        .then((res) => {
+          // alert("Berhasil memasukkan data");
+          // console.log(`Res : ${res}`);
+          if (res.status.code === "201") {
+            alert("Berhasil memasukkan data");
+            this.setState({
+              ...this.state,
+              goodsName: "",
+              goodsType: this.state.types[0].id,
+            });
+          }
+        })
+        .catch((e) => console.log(e));
 
-    createGoods(good)
-      .then(() => alert("Berhasil memasukkan data"))
-      .catch((e) => console.log(e));
+      this.setState({
+        goodsName: "",
+        goodsType: this.state.types[0].id,
+      });
+    }
   };
 
   render() {
@@ -74,7 +96,9 @@ class CreateGoods extends Component {
                 onChange={this.handleChange}
               >
                 {types.map((type) => (
-                  <option value={type.id}>{type.name}</option>
+                  <option key={type.id} value={type.id}>
+                    {type.name}
+                  </option>
                 ))}
               </select>
             </label>
